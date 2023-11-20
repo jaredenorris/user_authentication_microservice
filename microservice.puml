@@ -1,0 +1,39 @@
+@startuml microservice_diagram
+actor MainApp
+participant "Authentication Microservice" as AuthMicroservice
+
+MainApp -> AuthMicroservice: Request for User Registration
+activate AuthMicroservice
+AuthMicroservice -> AuthMicroservice: Validate request
+
+alt Valid Request
+    AuthMicroservice --> AuthMicroservice: Register User in Database
+    AuthMicroservice --> AuthMicroservice: Generate JWT Token
+    AuthMicroservice --> MainApp: Return Token
+else Invalid Request
+    AuthMicroservice --> MainApp: Return Error
+end
+
+MainApp -> AuthMicroservice: Request for User Login
+activate AuthMicroservice
+AuthMicroservice -> AuthMicroservice: Validate request
+
+alt Valid Request
+    AuthMicroservice --> AuthMicroservice: Authenticate User
+    AuthMicroservice --> AuthMicroservice: Generate JWT Token
+    AuthMicroservice --> MainApp: Return Token
+else Invalid Request
+    AuthMicroservice --> MainApp: Return Error
+end
+
+MainApp -> AuthMicroservice: Request for Token Verification
+activate AuthMicroservice
+AuthMicroservice -> AuthMicroservice: Validate Token
+
+alt Valid Token
+    AuthMicroservice --> MainApp: Return Verification Result
+else Invalid Token
+    AuthMicroservice --> MainApp: Return Verification Result
+end
+
+@enduml
