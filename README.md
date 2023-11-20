@@ -56,5 +56,5 @@ User registration failed. Response:
 
 ### UML Sequence Diagram
 
-![Microservice Diagram](microservice/microservice_diagram.png)
+![Microservice Diagram](https://github.com/jaredenorris/user_authentication_microservice/blob/master/microservice_diagram.png)
 
